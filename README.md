@@ -1,4 +1,4 @@
-# STRUCTURE DES DONNÉES - GRAPHES - C++
+# STRUCTURES DES DONNÉES - GRAPHES - C++
 
 
 ## Application console Alerte COVID
