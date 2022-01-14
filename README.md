@@ -10,10 +10,13 @@ L’interaction se fait au moyen d’une interface de la console (version graphi
 Cette application Alerte COVID diffère légèrement de la version originale puisque celle-ci est juste une simulation pour consolider mes connaissances des graphes apprises lors du cours de Structures des données (Inf2010) et du cours de Structure Discrète (Log2810).
 
 ### Contraintes de l’application : 
-• Le fichier individus.txt recense tous les individus que l'application prend en compte, ainsi qu’un tag pour indiquer si un individu a eu un diagnostic positif à la Covid (1) ou non (0). Chaque individu porte un nom unique pour alleger les fichiers textes.
-• Le fichier contacts.txt recense tous les contacts existants entre les individus, ainsi que la distance entre des personnes.
-• L’application permet à une personne de vérifier si elle a été exposée au COVID au cours des 14 derniers jours.
-• Le contact entre deux personnes doit avoir été étroit, soit à moins de deux mètres pour lui considérer exposé à la Covid.
+Le fichier individus.txt recense tous les individus que l'application prend en compte, ainsi qu’un tag pour indiquer si un individu a eu un diagnostic positif à la Covid (1) ou non (0). Chaque individu porte un nom unique pour alleger les fichiers textes.
+
+Le fichier contacts.txt recense tous les contacts existants entre les individus, ainsi que la distance entre des personnes.
+
+L’application permet à une personne de vérifier si elle a été exposée au COVID au cours des 14 derniers jours.
+
+Le contact entre deux personnes doit avoir été étroit, soit à moins de deux mètres pour lui considérer exposé à la Covid.
 
 
 ## Note :
