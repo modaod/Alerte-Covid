@@ -15,9 +15,9 @@ Graph::~Graph() {
 @param fichier2: nom du fichier de contacts
 */
 void Graph::creerGrapheExposition(const string& fichier1, const string& fichier2) {
-    
 
-    if (fichierChargees(fichier1,fichier2))
+
+    if (fichierChargees(fichier1, fichier2))
         std::cout << "Lecture des fichiers terminee \n\n";
     else
         std::cout << "Les fichiers n'ont pas pu etre charges.\n";
@@ -35,12 +35,48 @@ void Graph::identifierExposition(const string& nom1, const string& nom2) {
         cout << "Aucune exposition detectee " << endl;
 }
 
-void Graph::NotifierExposition(const string& nom) {
-    bool estExpose = exposition(nom);
-    if (estExpose)
+bool Graph::verifierPersonne(const string& nom) {
+    bool trouve = false;
+    for (auto person : listePersonnes_) {
+        if (person->getNom() == nom)
+        {
+            trouve = true;
+            break;
+        }
+    }
+    return trouve;
+}
+
+bool Graph::verifierPersonne(const string& nom1, const string& nom2) {
+    return verifierPersonne(nom1) && verifierPersonne(nom2);
+}
+
+void Graph::verifierExposition(const string& nom) {
+    bool trouve = verifierPersonne(nom);
+    
+    if (!trouve) {
+        cout << "Cette personne n'existe pas ! \n\n";
+        return;
+    }
+   
+    if (exposition(nom))
         cout << "Vous avez ete expose au cours des 14 derniers jours. \n";
     else
         cout << "Aucune exposition detectee. \n";
+}
+
+void Graph::verifierExposition(const string& nom1, const string& nom2) {
+    bool trouve = verifierPersonne(nom1, nom2);
+
+    if (!trouve) {
+        cout << "Veuillez s'assurer que ces personnes existent ! \n\n";
+        return;
+    }
+
+    if (exposition(nom1, nom2))
+        cout << "Vous avez ete expose au cours des 14 derniers jours. \n";
+    else
+        cout << "Ces deux personnes n'ont pas de contacts rapproche. \n";
 }
 
 Graph& Graph::operator+=(const Personne& personne) {
@@ -138,10 +174,7 @@ ostream& Graph::afficherPersonnes(ostream& os) const {
 
 bool Graph::fichierChargees(const string& nomFichier1, const string& nomFichier2)
 {
-    bool chargees = false;
-    if (chargerPersonnes(nomFichier1) && chargerContacts(nomFichier2))
-          chargees = true;
-    return chargees;
+    return chargerPersonnes(nomFichier1) && chargerContacts(nomFichier2);
 }
 
 void Graph::afficherGraph(ostream& os) const {
@@ -164,7 +197,7 @@ bool Graph::exposition(const string& nom1, const string& nom2) {
 
 bool Graph::exposition(const string& nom) {
     for (auto& v : listeContacts_) {
-        if (v->getFrom().getNom() == nom || v->getTo().getNom() == nom
+        if ((v->getFrom().getNom() == nom || v->getTo().getNom() == nom)
             && v->getDistance() <= DEUX_METRE)
             return true;
     }

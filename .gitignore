@@ -33,3 +33,11 @@
 *.exe
 *.out
 *.app 
+
+# Project files
+*.vcxproj*
+
+# Debug directory
+x64/
+
+# Git directory

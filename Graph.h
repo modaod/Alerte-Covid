@@ -20,7 +20,8 @@ public:
 	void creerGrapheExposition(const string& Fichier1, const string& Fichier2);
 	void afficherGrapheExposition();
 	void identifierExposition(const string&, const string&);
-	void NotifierExposition(const string&);
+	void verifierExposition(const string&);
+	void verifierExposition(const string&, const string&);
 	ostream& afficherContacts(ostream& os) const;
 	ostream& afficherPersonnes(ostream& os) const;
 	bool fichierChargees(const string& nomFichier1, const string& nomFichier2);
@@ -35,6 +36,8 @@ private:
 	bool exposition(const string&, const string&);
 	bool chargerContacts(const string& nomFichier);
 	bool chargerPersonnes(const string& nomFichier);
+	bool verifierPersonne(const string&);
+	bool verifierPersonne(const string&, const string&);
 
 	set<Personne*> listePersonnes_;
 	set<Contacts*> listeContacts_;

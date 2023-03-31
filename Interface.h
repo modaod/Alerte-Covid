@@ -14,7 +14,7 @@ private:
 	Graph graphe_;
 	void creationGraphreExposition();
 	void AffichageGrapheExposition();
-	void envoyerNotification();
+	void envoyerNotification(const char& option);
 
 
 };

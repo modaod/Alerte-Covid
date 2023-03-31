@@ -21,7 +21,7 @@ void Interface::afficherInterface()
 		system("CLS");
 		std::cout << '\n'<< std:: setw(50) <<" "  <<"-Menu global-\n"  << std::endl;
 		std::cout << "Selectionnez une des options suivantes : \n" << std::endl;
-		std::cout << "(a) Lancer traçage COVID" << std::endl
+		std::cout << "(a) Lancer tracage COVID" << std::endl
 			<< "(b) Quitter" << std::endl;
 
 		cin >> input;
@@ -66,8 +66,9 @@ void Interface::afficherInterfaceCovid()
 		std::cout << "Selectionnez une des options suivantes : \n" << std::endl;
 		std::cout << "(a) Creer le graph d'exposition" << std::endl
 			<< "(b) Afficher le graphe d'exposition" << std::endl
-			<< "(c) Afficher notification COVID" << std::endl
-			<< "(d) Quitter" << std::endl;
+			<< "(c) Verifier si une personne est exposee au COVID19" << std::endl
+			<< "(d) Verifier si deux personnes ont eu un contact rapproche" << std::endl
+			<< "(e) Quitter" << std::endl;
 
 		cin >> input;
 		if (input.size() == 1)
@@ -91,11 +92,18 @@ void Interface::afficherInterfaceCovid()
 			case 'c':
 			{
 
-				envoyerNotification();
+				envoyerNotification('c');
 				system("pause");
 				break;
 			}
 			case 'd':
+			{
+
+				envoyerNotification('d');
+				system("pause");
+				break;
+			}
+			case 'e':
 				fin = true;
 				std::cout << "retour au menu global" << std::endl;
 				system("pause");
@@ -122,11 +130,11 @@ void Interface::creationGraphreExposition()
 {
 	std::cout << "Creation du graphe\n " << std::endl;
 
-	std::cout << "\nSaisir le nom du fichier.txt d'individus a analyser : ";
+	std::cout << "\nSaisir le nom du fichier .txt d'individus a analyser : ";
 	std::string fichierIndividusTxt;
 	std::cin >> fichierIndividusTxt;
 
-	std::cout << "Saisir le nom du fichier.txt des contacts entres les individus : ";
+	std::cout << "Saisir le nom du fichier .txt des contacts entres les individus : ";
 	std::string fichierContactsTxt;
 	std::cin >> fichierContactsTxt;
 	
@@ -152,15 +160,28 @@ void Interface::AffichageGrapheExposition()
 	else
 		std::cout << "Veuillez choisir l'option (a) avant de continuer s'il vous plait\n" << std::endl;
 }
-void Interface::envoyerNotification()
+void Interface::envoyerNotification(const char& option)
 {
 	if (grapheCree == true)
 	{
-		std::cout << "\nSaisir le nom de la personne a verifier : ";
-		std::string nom;
-		std::cin >> nom;
-		std::cout << "Envoie de la notification\n " << std::endl;
-		graphe_.NotifierExposition(nom);
+		if (option == 'c')
+		{
+			std::cout << "\nSaisir le nom de la personne a verifier : ";
+			std::string nom;
+			std::cin >> nom;
+			// std::cout << "Verification en cours\n " << std::endl;
+			graphe_.verifierExposition(nom);
+		}
+		else
+		{
+			std::string nom1, nom2;
+			std::cout << "\nSaisir le nom de la premiere personne : ";
+			std::cin >> nom1;
+			std::cout << "\nSaisir le nom de la deuxieme personne : ";
+			std::cin >> nom2;
+			// std::cout << "Verification en cours\n " << std::endl;
+			graphe_.verifierExposition(nom1, nom2);
+		}
 	}
 	else 
 		std::cout << "Veuillez choisir l'option (a) avant de continuer s'il vous plait\n" << std::endl;
